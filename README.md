@@ -1,4 +1,6 @@
-# PLC_X_Job
+# oneplace-job
 Job Module for onePlace X
 
-Coming soon based on skeleton and latest closed beta
+Coming soon based on job and latest closed beta
+
+Create offers, manage job orders, jobs and much more.
