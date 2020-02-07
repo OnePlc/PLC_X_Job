@@ -32,7 +32,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * Load module config file
@@ -60,17 +60,6 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Job($dbAdapter));
                     return new TableGateway('job', $dbAdapter, null, $resultSetPrototype);
-                },
-                # Job Module - Position Model
-                Model\PositionTable::class => function($container) {
-                    $tableGateway = $container->get(Model\PositionTableGateway::class);
-                    return new Model\PositionJobTable($tableGateway,$container);
-                },
-                Model\PositionTableGateway::class => function ($container) {
-                    $dbAdapter = $container->get(AdapterInterface::class);
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Position($dbAdapter));
-                    return new TableGateway('jobposition', $dbAdapter, null, $resultSetPrototype);
                 },
             ],
         ];
@@ -108,24 +97,6 @@ class Module {
                     return new Controller\ApiController(
                         $oDbAdapter,
                         $container->get(Model\JobTable::class),
-                        $container
-                    );
-                },
-                # Job Position Controller
-                Controller\PositionController::class => function($container) {
-                    $oDbAdapter = $container->get(AdapterInterface::class);
-                    return new Controller\PositionController(
-                        $oDbAdapter,
-                        $container->get(Model\PositionTable::class),
-                        $container
-                    );
-                },
-                # Api Position Plugin
-                Controller\ApiPositionController::class => function($container) {
-                    $oDbAdapter = $container->get(AdapterInterface::class);
-                    return new Controller\ApiPositionController(
-                        $oDbAdapter,
-                        $container->get(Model\PositionTable::class),
                         $container
                     );
                 },

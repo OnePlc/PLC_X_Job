@@ -13,30 +13,3 @@ ADD `description` TEXT NOT NULL DEFAULT '' AFTER `date`,
 ADD `project_idfs` int(11) NOT NULL DEFAULT '0' AFTER `description`,
 ADD `discount` FLOAT NOT NULL DEFAULT 0 AFTER `date`;
 
-
---
--- Job_position Table
---
-CREATE TABLE `job_position` (
-  `Position_ID` int(11) NOT NULL,
-  `job_idfs` int(11) NOT NULL DEFAULT '0',
-  `article_idfs` int(11) NOT NULL DEFAULT '0',
-  `variant_idfs` int(11) NOT NULL DEFAULT '0',
-  `ref_idfs` int(11) NOT NULL DEFAULT '0',
-  `ref_type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `sort_id` int(4) NOT NULL DEFAULT '0',
-  `amount` float NULL DEFAULT 0,
-  `price` double NULL DEFAULT 0,
-  `discount` float NULL DEFAULT 0,
-  `discount_type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
-ALTER TABLE `job_position`
-  ADD PRIMARY KEY (`Position_ID`);
-
-ALTER TABLE `job_position`
-  MODIFY `Position_ID` int(11) NOT NULL AUTO_INCREMENT;
-
-
