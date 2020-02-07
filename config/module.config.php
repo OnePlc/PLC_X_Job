@@ -94,6 +94,35 @@ return [
                     ],
                 ],
             ],
+            'jobposition' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/job/position[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\PositionController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'jobposition-api' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/job/position/api[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ApiPositionController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+
         ],
     ],
 

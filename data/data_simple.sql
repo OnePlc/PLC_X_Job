@@ -3,7 +3,7 @@
 -- Core Form - Task Base Fields
 --
 INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
-(NULL, 'select', 'User', 'usert_idfs', 'job-base', 'job-single', 'col-md-3', '/user/view/##ID##', '/user/api/list/0', 0, 1, 0, 'user-single', 'OnePlace\\User\\Model\\UserTable','add-OnePlace\\User\\Controller\\UserController'),
+(NULL, 'select', 'User', 'user_idfs', 'job-base', 'job-single', 'col-md-3', '/user/view/##ID##', '/user/api/list/0', 0, 1, 0, 'user-single', 'OnePlace\\User\\Model\\UserTable','add-OnePlace\\User\\Controller\\UserController'),
 (NULL, 'select', 'Contact', 'contact_idfs', 'job-base', 'job-single', 'col-md-3', '/contact/view/##ID##', '/contact/quicksearch', 0, 1, 0, 'contact-single', 'OnePlace\\Contact\\Model\\ContactTable','add-OnePlace\\Contact\\Controller\\ContactController'),
 (NULL, 'select', 'Type', 'type_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/type', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\TypeController'),
 (NULL, 'select', 'Paymentmethod', 'paymentmethod_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/paymentmethod', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\PaymentmethodController'),
