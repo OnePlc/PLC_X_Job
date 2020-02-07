@@ -40,40 +40,6 @@ class JobTable extends CoreEntityTable {
     }
 
     /**
-     * Fetch All Job Entities based on Filters
-     *
-     * @param bool $bPaginated
-     * @return Paginator Paginated Table Connection
-     * @since 1.0.0
-     */
-    public function fetchAll($bPaginated = false) {
-        $oSel = new Select($this->oTableGateway->getTable());
-
-        # Return Paginator or Raw ResultSet based on selection
-        if ($bPaginated) {
-            # Create result set for user entity
-            $resultSetPrototype = new ResultSet();
-            $resultSetPrototype->setArrayObjectPrototype(new Job($this->oTableGateway->getAdapter()));
-
-            # Create a new pagination adapter object
-            $oPaginatorAdapter = new DbSelect(
-            # our configured select object
-                $oSel,
-                # the adapter to run it against
-                $this->oTableGateway->getAdapter(),
-                # the result set to hydrate
-                $resultSetPrototype
-            );
-            # Create Paginator with Adapter
-            $oPaginator = new Paginator($oPaginatorAdapter);
-            return $oPaginator;
-        } else {
-            $oResults = $this->oTableGateway->selectWith($oSel);
-            return $oResults;
-        }
-    }
-
-    /**
      * Get Job Entity
      *
      * @param int $id
@@ -81,17 +47,8 @@ class JobTable extends CoreEntityTable {
      * @since 1.0.0
      */
     public function getSingle($id) {
-        $id = (int) $id;
-        $rowset = $this->oTableGateway->select(['Job_ID' => $id]);
-        $row = $rowset->current();
-        if (! $row) {
-            throw new \RuntimeException(sprintf(
-                'Could not find job with identifier %d',
-                $id
-            ));
-        }
-
-        return $row;
+        # Use core function
+        return $this->getSingleEntity($id,'Job_ID');
     }
 
     /**
@@ -142,5 +99,15 @@ class JobTable extends CoreEntityTable {
         $this->oTableGateway->update($aData, ['Job_ID' => $id]);
 
         return $id;
+    }
+
+    /**
+     * Generate new single Entity
+     *
+     * @return Job
+     * @since 1.0.0
+     */
+    public function generateNew() {
+        return new Job($this->oTableGateway->getAdapter());
     }
 }

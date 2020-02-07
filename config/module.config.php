@@ -52,6 +52,48 @@ return [
                     ],
                 ],
             ],
+            'job-export' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/job/export[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\ExportController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'job-search' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/job/search[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\SearchController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'job-plugin' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/job/plugin[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\PluginController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
         ],
     ],
 
@@ -59,6 +101,18 @@ return [
     'view_manager' => [
         'template_path_stack' => [
             'job' => __DIR__ . '/../view',
+        ],
+    ],
+
+    # Translator
+    'translator' => [
+        'locale' => 'de_DE',
+        'translation_file_patterns' => [
+            [
+                'type'     => 'gettext',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern'  => '%s.mo',
+            ],
         ],
     ],
 ];
