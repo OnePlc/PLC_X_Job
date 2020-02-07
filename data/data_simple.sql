@@ -6,8 +6,6 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 (NULL, 'select', 'User', 'usert_idfs', 'job-base', 'job-single', 'col-md-3', '/user/view/##ID##', '/user/api/list/0', 0, 1, 0, 'user-single', 'OnePlace\\User\\Model\\UserTable','add-OnePlace\\User\\Controller\\UserController'),
 (NULL, 'select', 'Contact', 'contact_idfs', 'job-base', 'job-single', 'col-md-3', '/contact/view/##ID##', '/contact/quicksearch', 0, 1, 0, 'contact-single', 'OnePlace\\Contact\\Model\\ContactTable','add-OnePlace\\Contact\\Controller\\ContactController'),
 (NULL, 'select', 'Type', 'type_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/type', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\TypeController'),
---partial contactinfo
---partial positions
 (NULL, 'select', 'Paymentmethod', 'paymentmethod_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/paymentmethod', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\PaymentmethodController'),
 (NULL, 'select', 'Paymentstate', 'paymentstate_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/paymentmethod', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\PaymentstateController'),
 (NULL, 'select', 'Deliverymethod', 'deliverymethod_idfs', 'job-base', 'job-single', 'col-md-3', '', '/job/api/list/job-single/deliverymethod', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\DeliverymethodController'),
@@ -26,9 +24,9 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 ('add', 'OnePlace\\Job\\Controller\\StateController', 'Add State', '', '', 0);
 
 
------------------
+--
 -- Job position Table
-----------------
+--
 
 INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'select', 'Job', 'job_idfs', 'jobposition-base', 'jobposition-single', 'col-md-3', '/user/view/##ID##', '/job/api/list/0', 0, 1, 0, 'entitytag-single', 'OnePlace\\Job\\Model\\JobTable','add-OnePlace\\Job\\Controller\\JobController'),
@@ -51,15 +49,15 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
 ('add', 'OnePlace\\Job\\Controller\\PositionController', 'Add', '', '', 0),
 ('edit', 'OnePlace\\Job\\Controller\\PositionController', 'Edit', '', '', 0),
-('index', 'OnePlace\\Job\\Controller\\PositionController', 'Index', 'Jobs', '/job', 1),
-('list', 'OnePlace\\Job\\Controller\\ApiController', 'List', '', '', 1),
+('index', 'OnePlace\\Job\\Controller\\PositionController', 'Index', 'Job Position', '/job/position', 1),
+('list', 'OnePlace\\Job\\Controller\\ApiPositionController', 'List', '', '', 0),
 ('view', 'OnePlace\\Job\\Controller\\PositionController', 'View', '', '', 0);
 
 --
 -- Job position Form
 --
-INSERT INTO `core_form` (`form_key`, `label`) VALUES ('jobposition-single', 'Position');
-
+INSERT INTO `core_form` (`form_key`, `label`, `entity_class`, `entity_tbl_class`) VALUES
+('jobposition-single', 'Position', 'OnePlace\\Job\\Model\\Position', 'OnePlace\\Job\\Model\\PositionTable');
 --
 -- Job position Index List
 --
@@ -91,7 +89,7 @@ INSERT INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `created
 (NULL, 'paymentstate', 'Paymentstate', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'deliverymethod', 'Deliverymethod', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'type', 'Type', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
-(NULL, 'paymentstate', 'Paymentstate', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
+(NULL, 'state', 'State', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
 
 --
 -- job_position Table Custom Tags

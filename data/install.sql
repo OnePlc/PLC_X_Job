@@ -29,7 +29,8 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 --
 -- Form
 --
-INSERT INTO `core_form` (`form_key`, `label`) VALUES ('job-single', 'Job');
+INSERT INTO `core_form` (`form_key`, `label`, `entity_class`, `entity_tbl_class`) VALUES
+('job-single', 'Job', 'OnePlace\\Job\\Model\\Job', 'OnePlace\\Job\\Model\\JobTable');
 
 --
 -- Index List
@@ -40,7 +41,8 @@ INSERT INTO `core_index_table` (`table_name`, `form`, `label`) VALUES
 --
 -- Tabs
 --
-INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES ('job-base', 'job-single', 'Job', 'Base', 'fas fa-cogs', '', '0', '', '');
+INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
+('job-base', 'job-single', 'Job', 'Base', 'fas fa-cogs', '', '0', '', '');
 
 --
 -- Buttons
@@ -53,7 +55,7 @@ INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `
 --
 -- Fields
 --
-INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_ist`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'text', 'Name', 'label', 'job-base', 'job-single', 'col-md-3', '/job/view/##ID##', '', 0, 1, 0, '', '', '');
 
 COMMIT;
