@@ -1,2 +1,8 @@
-<?= $this->partial('partial/formheader',['sTitle'=>'Edit Job '.$oItem->getLabel()]) ?>
-<?= $this->partial('partial/basicform', ['sFormName'=>$sFormName,'oItem'=>$oItem]); ?>
+<?php
+$aPartialData = ['sFormName'=>$sFormName];
+if(isset($aPartialExtraData)) {
+    $aPartialData['aPartialExtraData'] = $aPartialExtraData;
+}
+?>
+<?= $this->partial('partial/formheader',['sTitle'=>'Add new Job']) ?>
+<?= $this->partial('partial/basicform', $aPartialData); ?>
