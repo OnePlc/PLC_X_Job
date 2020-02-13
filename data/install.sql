@@ -24,7 +24,9 @@ INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav
 ('edit', 'OnePlace\\Job\\Controller\\JobController', 'Edit', '', '', 0),
 ('index', 'OnePlace\\Job\\Controller\\JobController', 'Index', 'Jobs', '/job', 1),
 ('list', 'OnePlace\\Job\\Controller\\ApiController', 'List', '', '', 1),
-('view', 'OnePlace\\Job\\Controller\\JobController', 'View', '', '', 0);
+('view', 'OnePlace\\Job\\Controller\\JobController', 'View', '', '', 0),
+('dump', 'OnePlace\\Job\\Controller\\ExportController', 'Excel Dump', '', '', 0),
+('index', 'OnePlace\\Job\\Controller\\SearchController', 'Search', '', '', 0);
 
 --
 -- Form
@@ -41,8 +43,7 @@ INSERT INTO `core_index_table` (`table_name`, `form`, `label`) VALUES
 --
 -- Tabs
 --
-INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
-('job-base', 'job-single', 'Job', 'Base', 'fas fa-cogs', '', '0', '', '');
+INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES ('job-base', 'job-single', 'Job', 'Base', 'fas fa-cogs', '', '0', '', '');
 
 --
 -- Buttons
@@ -50,12 +51,24 @@ INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `cou
 INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `class`, `append`, `form`, `mode`, `filter_check`, `filter_value`) VALUES
 (NULL, 'Save Job', 'fas fa-save', 'Save Job', '#', 'primary saveForm', '', 'job-single', 'link', '', ''),
 (NULL, 'Edit Job', 'fas fa-edit', 'Edit Job', '/job/edit/##ID##', 'primary', '', 'job-view', 'link', '', ''),
-(NULL, 'Add Job', 'fas fa-plus', 'Add Job', '/job/add', 'primary', '', 'job-index', 'link', '', '');
+(NULL, 'Add Job', 'fas fa-plus', 'Add Job', '/job/add', 'primary', '', 'job-index', 'link', '', ''),
+(NULL, 'Export Jobs', 'fas fa-file-excel', 'Export Jobs', '/job/export', 'primary', '', 'job-index', 'link', '', ''),
+(NULL, 'Find Jobs', 'fas fa-searh', 'Find Jobs', '/job/search', 'primary', '', 'job-index', 'link', '', ''),
+(NULL, 'Export Jobs', 'fas fa-file-excel', 'Export Jobs', '#', 'primary initExcelDump', '', 'job-search', 'link', '', ''),
+(NULL, 'New Search', 'fas fa-searh', 'New Search', '/job/search', 'primary', '', 'job-search', 'link', '', '');
 
 --
 -- Fields
 --
 INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
 (NULL, 'text', 'Name', 'label', 'job-base', 'job-single', 'col-md-3', '/job/view/##ID##', '', 0, 1, 0, '', '', '');
+
+--
+-- User XP Activity
+--
+INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VALUES
+(NULL, 'job-add', 'Add New Job', '50'),
+(NULL, 'job-edit', 'Edit Job', '5'),
+(NULL, 'job-export', 'Edit Job', '5');
 
 COMMIT;
