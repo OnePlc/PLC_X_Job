@@ -9,7 +9,7 @@
  * @author Verein onePlace
  * @copyright (C) 2020  Verein onePlace <admin@1plc.ch>
  * @license https://opensource.org/licenses/BSD-3-Clause
- * @version 1.0.0
+ * @version 1.0.3
  * @since 1.0.0
  */
 
@@ -24,7 +24,6 @@ use Laminas\Session\Config\StandardConfig;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Container;
 use Application\Controller\CoreEntityController;
-use OnePlace\Job\Controller\PluginController;
 
 class Module {
     /**
@@ -32,7 +31,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     /**
      * Load module config file
@@ -71,20 +70,10 @@ class Module {
     public function getControllerConfig() : array {
         return [
             'factories' => [
-                # Plugin Example Controller
-                Controller\PluginController::class => function($container) {
-                    $oDbAdapter = $container->get(AdapterInterface::class);
-                    return new Controller\PluginController(
-                        $oDbAdapter,
-                        $container->get(Model\JobTable::class),
-                        $container
-                    );
-                },
                 # Job Main Controller
                 Controller\JobController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     $tableGateway = $container->get(Model\JobTable::class);
-                    # hook plugin
                     return new Controller\JobController(
                         $oDbAdapter,
                         $container->get(Model\JobTable::class),
@@ -113,6 +102,15 @@ class Module {
                 Controller\SearchController::class => function($container) {
                     $oDbAdapter = $container->get(AdapterInterface::class);
                     return new Controller\SearchController(
+                        $oDbAdapter,
+                        $container->get(Model\JobTable::class),
+                        $container
+                    );
+                },
+                # Installer
+                Controller\InstallController::class => function($container) {
+                    $oDbAdapter = $container->get(AdapterInterface::class);
+                    return new Controller\InstallController(
                         $oDbAdapter,
                         $container->get(Model\JobTable::class),
                         $container

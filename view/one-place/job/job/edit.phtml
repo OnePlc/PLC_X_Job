@@ -1,8 +1,8 @@
 <?php
-$aPartialData = ['sFormName'=>$sFormName];
+$aPartialData = ['sFormName'=>$sFormName,'oItem'=>$oItem];
 if(isset($aPartialExtraData)) {
     $aPartialData['aPartialExtraData'] = $aPartialExtraData;
 }
 ?>
-<?= $this->partial('partial/formheader',['sTitle'=>'Add new Job']) ?>
+<?= $this->partial('partial/formheader',['sTitle'=>'Edit Job '.$oItem->getLabel()]) ?>
 <?= $this->partial('partial/basicform', $aPartialData); ?>
