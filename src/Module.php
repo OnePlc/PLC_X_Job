@@ -24,6 +24,10 @@ use Laminas\Session\Config\StandardConfig;
 use Laminas\Session\SessionManager;
 use Laminas\Session\Container;
 use Application\Controller\CoreEntityController;
+use OnePlace\Job\Controller\JobController;
+use OnePlace\Job\Model\JobTable;
+use Laminas\EventManager\EventInterface as Event;
+
 
 class Module {
     /**
@@ -31,7 +35,7 @@ class Module {
      *
      * @since 1.0.0
      */
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.4';
 
     /**
      * Load module config file
@@ -41,6 +45,19 @@ class Module {
      */
     public function getConfig() : array {
         return include __DIR__ . '/../config/module.config.php';
+    }
+
+    public function onBootstrap(Event $e)
+    {
+        // This method is called once the MVC bootstrapping is complete
+        $application = $e->getApplication();
+        $container    = $application->getServiceManager();
+        $oDbAdapter = $container->get(AdapterInterface::class);
+        $tableGateway = $container->get(JobTable::class);
+
+        # Register Filter Plugin Hook
+        CoreEntityController::addHook('contact-view-before',(object)['sFunction'=>'attachJobForm','oItem'=>new JobController($oDbAdapter,$tableGateway,$container)]);
+        CoreEntityController::addHook('job-view-before',(object)['sFunction'=>'attachContactForm','oItem'=>new JobController($oDbAdapter,$tableGateway,$container)]);
     }
 
     /**

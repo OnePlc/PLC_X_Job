@@ -1,4 +1,3 @@
-
 ALTER TABLE `job` ADD `user_idfs` int(11) NOT NULL DEFAULT '0' AFTER `Job_ID`,
 ADD `contact_idfs` int(11) NOT NULL DEFAULT '0' AFTER `user_idfs`,
 ADD `type_idfs` int(11) NOT NULL DEFAULT '0' AFTER `contact_idfs`,

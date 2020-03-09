@@ -33,4 +33,18 @@ INSERT IGNORE INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `
 (NULL, 'deliverymethod', 'Deliverymethod', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'type', 'Type', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
 
+--
+-- Add new tabs for contact
+--
+INSERT INTO `core_form_tab` (`Tab_ID`, `form`, `title`, `subtitle`, `icon`, `counter`, `sort_id`, `filter_check`, `filter_value`) VALUES
+('contact-job', 'contact-single', 'Jobs', 'Recent Jobs', 'fas fa-book', '', '1', '', ''),
+('job-contact', 'job-single', 'Contact', 'Shipping & Billing', 'fas fa-user', '', '1', '', '');
+
+--
+-- Add new partial for contact
+--
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+(NULL, 'partial', 'Jobs', 'contact_job', 'contact-job', 'contact-single', 'col-md-12', '', '', '0', '1', '0', '', '', ''),
+(NULL, 'partial', 'Contact', 'job_contact', 'job-contact', 'job-single', 'col-md-12', '', '', '0', '1', '0', '', '', '');
+
 

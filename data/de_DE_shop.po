@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"X-Generator: Poedit 2.2.4\n"
+
+msgid "Jobs"
+msgstr "Bestellungen"
+
+msgid "Job"
+msgstr "Bestellung"
+
+msgid "Add Job"
+msgstr "Bestellung erfassen"
+
+msgid "Export Jobs"
+msgstr "Bestellungen exportieren"
+
+msgid "Find Jobs"
+msgstr "Bestellung finden"
+
+msgid "Save Job"
+msgstr "Bestellung speichern"
+
+msgid "Edit Job"
+msgstr "Bestellung bearbeiten"
+
+msgid "Could not load job data"
+msgstr "Bestellungsdaten können nicht geladen werden"
+
+msgid "No Jobs yet"
+msgstr "Bisher keine Bestellungen"

@@ -53,9 +53,9 @@ INSERT INTO `core_form_button` (`Button_ID`, `label`, `icon`, `title`, `href`, `
 (NULL, 'Edit Job', 'fas fa-edit', 'Edit Job', '/job/edit/##ID##', 'primary', '', 'job-view', 'link', '', ''),
 (NULL, 'Add Job', 'fas fa-plus', 'Add Job', '/job/add', 'primary', '', 'job-index', 'link', '', ''),
 (NULL, 'Export Jobs', 'fas fa-file-excel', 'Export Jobs', '/job/export', 'primary', '', 'job-index', 'link', '', ''),
-(NULL, 'Find Jobs', 'fas fa-searh', 'Find Jobs', '/job/search', 'primary', '', 'job-index', 'link', '', ''),
+(NULL, 'Find Jobs', 'fas fa-search', 'Find Jobs', '/job/search', 'primary', '', 'job-index', 'link', '', ''),
 (NULL, 'Export Jobs', 'fas fa-file-excel', 'Export Jobs', '#', 'primary initExcelDump', '', 'job-search', 'link', '', ''),
-(NULL, 'New Search', 'fas fa-searh', 'New Search', '/job/search', 'primary', '', 'job-search', 'link', '', '');
+(NULL, 'New Search', 'fas fa-search', 'New Search', '/job/search', 'primary', '', 'job-search', 'link', '', '');
 
 --
 -- Fields
@@ -70,5 +70,10 @@ INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VAL
 (NULL, 'job-add', 'Add New Job', '50'),
 (NULL, 'job-edit', 'Edit Job', '5'),
 (NULL, 'job-export', 'Edit Job', '5');
+
+--
+-- Module Icon
+--
+INSERT INTO `settings` (`settings_key`, `settings_value`) VALUES ('job-icon', 'fas fa-book');
 
 COMMIT;
