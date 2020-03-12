@@ -62,6 +62,9 @@ class JobTable extends CoreEntityTable {
     public function saveSingle(Job $oJob) {
         $aDefaultData = [
             'label' => $oJob->label,
+            'payment_id' => $oJob->payment_id,
+            'payment_received' => $oJob->payment_received,
+            'payment_session_id' => $oJob->payment_session_id,
         ];
 
         return $this->saveSingleEntity($oJob,'Job_ID',$aDefaultData);

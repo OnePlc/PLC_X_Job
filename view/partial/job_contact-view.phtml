@@ -18,8 +18,8 @@ if(array_key_exists('job_contact',$this->aPartialData)) {
             <div class="col-md-12">
                 <i class="fas fa-user"></i> <?=$sName?><br/>
                 <hr/>
-                <i class="fas fa-envelope"></i> <?=($oContact->getTextField('email')) ? $oContact->getTextField('email') : '-'?><br/>
-                <i class="fas fa-phone"></i> <?=($oContact->getTextField('phone')) ? $oContact->getTextField('phone') : '-'?><br/>
+                <i class="fas fa-envelope"></i> <?=($oContact->getTextField('email_private')) ? $oContact->getTextField('email_private') : '-'?><br/>
+                <i class="fas fa-phone"></i> <?=($oContact->getTextField('phone_private')) ? $oContact->getTextField('phone_private') : '-'?><br/>
                 <hr/>
                 <?php
                 if(isset($oContact->oAddresses)) {

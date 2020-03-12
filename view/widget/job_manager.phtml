@@ -1,0 +1,128 @@
+<?php
+use Application\Controller\CoreController;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\TableGateway\TableGateway;
+
+$aTotalSessions = [];
+
+try {
+    $oJobTbl = CoreController::$oServiceManager->get(\OnePlace\Job\Model\JobTable::class);
+    $oJobPosTbl = CoreController::$oServiceManager->get(\OnePlace\Job\Position\Model\PositionTable::class);
+} catch(\RuntimeException $e) { ?>
+    <div class="alert alert-danger">
+        <?=$this->translate('Could not load job table')?>
+    </div>
+<?php
+}
+
+# Get State Tag
+$oStateTag = CoreController::$aCoreTables['core-tag']->select(['tag_key' => 'state']);
+$aTotalSessions = [];
+$aSessionsWaiting = [];
+
+$aSessionsWaitingDB = $oJobTbl->fetchAll(false, ['payment_received-like' => '0000-00-00 00:00:00']);
+if(count($aSessionsWaitingDB) > 0) {
+    foreach($aSessionsWaitingDB as $oBas) {
+        $aSessionsWaiting[] = $oBas;
+    }
+}
+if (count($oStateTag) > 0) {
+    $oStateTag = $oStateTag->current();
+
+# Get Job "done" Entity State Tag
+    $oNewState = CoreController::$aCoreTables['core-entity-tag']->select([
+        'entity_form_idfs' => 'job-single',
+        'tag_idfs' => $oStateTag->Tag_ID,
+        'tag_key' => 'new',
+    ]);
+
+    if(count($oNewState) > 0) {
+        $oNewState = $oNewState->current();
+        $aTotalSessionsDB = $oJobTbl->fetchAll(false, ['state_idfs' => $oNewState->Entitytag_ID]);
+        if(count($aTotalSessionsDB) > 0) {
+            foreach($aTotalSessionsDB as $oJob) {
+                $aJobPos = [];
+                $aPosDB = $oJobPosTbl->fetchAll(false, ['job_idfs' => $oJob->getID()]);
+                $dTotal = 0;
+                if(count($aPosDB) > 0) {
+                    foreach($aPosDB as $oPos) {
+                        $aJobPos[] = $oPos;
+                        $dTotal+=($oPos->amount*$oPos->price);
+                    }
+                }
+                $oJob->aItems = $aJobPos;
+                $oJob->dTotal = $dTotal;
+                $aTotalSessions[] = $oJob;
+            }
+        }
+    }
+}
+
+
+?>
+<div class="col-md-3 col-xl-3">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-actions float-right">
+                <div class="dropdown show">
+                    <a href="#" data-toggle="dropdown" data-display="static">
+                        <i class="align-middle" data-feather="more-horizontal"></i>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="/job">Alle Warenkörbe anzeigen</a>
+                        <a class="dropdown-item" href="/job/sessions">Offene Warenkörbe anzeigen</a>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-title mb-0">Bestellungen - Offen</h5>
+        </div>
+        <div class="card-body h-100">
+            <h3 class="badge badge-success" style="font-size:18px; background:orange !important;"><?=count($aTotalSessions)?></h3> Bestellungen aktuell offen
+            <hr/>
+            <b>Neueste 5 offene Bestellungen</b>
+            <ul class="list-group">
+                <?php
+                $iListCounter = 0;
+                $iListLimit = 5;
+                foreach($aTotalSessions as $oSess) {
+                    if($iListCounter == $iListLimit) {
+                        break;
+                    } ?>
+                    <li class="list-group-item">
+                        <a href="<?=$this->url('job',['action' => 'view', 'id' => $oSess->getID()])?>">
+                            <?=$oSess->label?>
+                        </a>
+                        <br/>- <small><?=count($oSess->aItems)?> Artikel</small> - <small><?=$oSess->dTotal?> €</small>
+                    </li>
+                    <?php
+                    $iListCounter++;
+                }
+                ?>
+            </ul>
+        </div>
+        <div class="card-body h-100">
+            <h3 class="badge badge-success" style="font-size:18px; background:orange !important;"><?=count($aSessionsWaiting)?></h3> Bestellungen warten auf Zahlungsbestätigung
+            <hr/>
+            <b>Warten auf Zahlungsbestätigung</b>
+            <ul class="list-group">
+                <?php
+                $iListCounter = 0;
+                $iListLimit = 5;
+                foreach($aSessionsWaiting as $oSess) {
+                    if($iListCounter == $iListLimit) {
+                        break;
+                    } ?>
+                    <li class="list-group-item">
+                        <a href="<?=$this->url('job',['action' => 'view', 'id' => $oSess->getID()])?>">
+                            <?=$oSess->label?>
+                        </a>
+                    </li>
+                    <?php
+                    $iListCounter++;
+                }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>

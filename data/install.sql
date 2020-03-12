@@ -22,6 +22,8 @@ ALTER TABLE `job`
 INSERT INTO `permission` (`permission_key`, `module`, `label`, `nav_label`, `nav_href`, `show_in_menu`) VALUES
 ('add', 'OnePlace\\Job\\Controller\\JobController', 'Add', '', '', 0),
 ('edit', 'OnePlace\\Job\\Controller\\JobController', 'Edit', '', '', 0),
+('close', 'OnePlace\\Job\\Controller\\JobController', 'Close', '', '', 0),
+('paid', 'OnePlace\\Job\\Controller\\JobController', 'Book Payment', '', '', 0),
 ('index', 'OnePlace\\Job\\Controller\\JobController', 'Index', 'Jobs', '/job', 1),
 ('list', 'OnePlace\\Job\\Controller\\ApiController', 'List', '', '', 1),
 ('view', 'OnePlace\\Job\\Controller\\JobController', 'View', '', '', 0),
@@ -75,5 +77,13 @@ INSERT INTO `user_xp_activity` (`Activity_ID`, `xp_key`, `label`, `xp_base`) VAL
 -- Module Icon
 --
 INSERT INTO `settings` (`settings_key`, `settings_value`) VALUES ('job-icon', 'fas fa-book');
+
+--
+-- widgets
+--
+INSERT INTO `core_widget` (`Widget_ID`, `widget_name`, `label`, `permission`) VALUES
+(NULL, 'job_manager', 'Job - Manager', 'index-Job\\Controller\\JobController');
+
+
 
 COMMIT;

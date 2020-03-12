@@ -19,6 +19,9 @@ use Application\Model\CoreEntityModel;
 
 class Job extends CoreEntityModel {
     public $label;
+    public $payment_id;
+    public $payment_received;
+    public $payment_session_id;
 
     /**
      * Job constructor.
@@ -45,6 +48,9 @@ class Job extends CoreEntityModel {
     public function exchangeArray(array $aData) {
         $this->id = !empty($aData['Job_ID']) ? $aData['Job_ID'] : 0;
         $this->label = !empty($aData['label']) ? $aData['label'] : '';
+        $this->payment_id = !empty($aData['payment_id']) ? $aData['payment_id'] : '';
+        $this->payment_received = !empty($aData['payment_received']) ? $aData['payment_received'] : '0000-00-00 00:00:00';
+        $this->payment_session_id = !empty($aData['payment_session_id']) ? $aData['payment_session_id'] : '';
 
         $this->updateDynamicFields($aData);
     }

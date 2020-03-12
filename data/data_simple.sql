@@ -9,9 +9,15 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 (NULL, 'select', 'Paymentmethod', 'paymentmethod_idfs', 'job-base', 'job-single', 'col-md-3', '', '/tag/api/list/job-single/paymentmethod', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\PaymentmethodController'),
 (NULL, 'select', 'Paymentstate', 'paymentstate_idfs', 'job-base', 'job-single', 'col-md-3', '', '/tag/api/list/job-single/paymentmethod', 0, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\PaymentstateController'),
 (NULL, 'select', 'Deliverymethod', 'deliverymethod_idfs', 'job-base', 'job-single', 'col-md-3', '', '/tag/api/list/job-single/deliverymethod', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\DeliverymethodController'),
-(NULL, 'select', 'State', 'state_idfs', 'job-base', 'job-single', 'col-md-3', '', '/tag/api/list/job-single/state', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\StateController');
+(NULL, 'select', 'State', 'state_idfs', 'job-base', 'job-single', 'col-md-3', '', '/tag/api/list/job-single/state', 1, 1, 0, 'entitytag-single', 'OnePlace\\Tag\\Model\\EntityTagTable', 'add-OnePlace\\Job\\Controller\\StateController'),
+(NULL, 'textarea', 'Description', 'description', 'job-base', 'job-single', 'col-md-12', '', '', '0', '1', '0', '', '', '');
 
-
+--
+-- Add Payment Fields
+--
+INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `form`, `class`, `url_view`, `url_list`, `tag_key`, `show_widget_left`, `allow_clear`, `readonly`, `tbl_cached_name`, `tbl_class`, `tbl_permission`) VALUES
+(NULL, 'datetime', 'Payment started', 'payment_started', 'job-payment', 'job-single', 'col-md-2', '/job/view/##ID##', '', '', '0', '1', '1', '', '', ''),
+(NULL, 'datetime', 'Payment received', 'payment_received', 'job-payment', 'job-single', 'col-md-2', '/job/view/##ID##', '', '', '0', '1', '1', '', '', '');
 
 --
 -- permissions
@@ -32,6 +38,13 @@ INSERT IGNORE INTO `core_tag` (`Tag_ID`, `tag_key`, `tag_label`, `created_by`, `
 (NULL, 'paymentstate', 'Paymentstate', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'deliverymethod', 'Deliverymethod', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00'),
 (NULL, 'type', 'Type', '1', '0000-00-00 00:00:00', '1', '0000-00-00 00:00:00');
+
+--
+-- Shop Tags
+--
+INSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `tag_value`, `tag_key`, `tag_color`, `tag_icon`, `parent_tag_idfs`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(NULL, 'job-single', (select `Tag_ID` from `core_tag` where `tag_key`='state'), 'new', 'new', '', '', 0, 1, '2020-03-10 14:54:33', 1, '2020-03-10 14:54:33'),
+(NULL, 'job-single', (select `Tag_ID` from `core_tag` where `tag_key`='state'), 'done', 'done', '', '', 0, 1, '2020-03-10 14:54:33', 1, '2020-03-10 14:54:33');
 
 --
 -- Add new tabs for contact

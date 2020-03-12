@@ -37,3 +37,9 @@ msgstr "Bestellungsdaten können nicht geladen werden"
 
 msgid "No Jobs yet"
 msgstr "Bisher keine Bestellungen"
+
+msgid "Book Payment"
+msgstr "Zahlung verbuchen"
+
+msgid "Close Job"
+msgstr "Bestellung abschliessen"

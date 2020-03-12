@@ -3,5 +3,25 @@ $aPartialData = ['sFormName'=>$sFormName,'oItem'=>$oItem];
 if(isset($aPartialExtraData)) {
     $aPartialData['aPartialExtraData'] = $aPartialExtraData;
 }
+
+/**
+ * Alert for Shop Orders with Customer Comments
+ */
+if(isset($oItem->description)) {
+    if($oItem->description != '') {
+        $bIsShopComment = stripos($oItem->description,'Bestellung aus dem Shop');
+        if($bIsShopComment === false) {
+        } else {
+            if($oItem->description != 'Bestellung aus dem Shop. Kommentar des Kunden:') { ?>
+                <div class="alert alert-info py-2 px-2">
+                    <?=$oItem->description?>
+                </div>
+            <?php
+            }
+        }
+        ?>
+    <?php
+    }
+}
 ?>
 <?= $this->partial('partial/viewform', $aPartialData); ?>

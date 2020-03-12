@@ -214,4 +214,48 @@ class JobController extends CoreEntityController {
             ]
         ];
     }
+
+    public function closeAction() {
+        $this->layout('layout/json');
+
+        $iJobID = $this->params()->fromRoute('id', 0);
+        $oJob = $this->oTableGateway->getSingle($iJobID);
+
+        # Get State Tag
+        $oStateTag = CoreEntityController::$aCoreTables['core-tag']->select(['tag_key' => 'state']);
+        if (count($oStateTag) > 0) {
+            $oStateTag = $oStateTag->current();
+
+            # Get Basket "done" Entity State Tag
+            $oDoneState = CoreEntityController::$aCoreTables['core-entity-tag']->select([
+                'entity_form_idfs' => 'job-single',
+                'tag_idfs' => $oStateTag->Tag_ID,
+                'tag_key' => 'done',
+            ]);
+
+            if(count($oDoneState) > 0) {
+                $oDoneState = $oDoneState->current();
+                $this->oTableGateway->updateAttribute('state_idfs',$oDoneState->Entitytag_ID,'Job_ID',$iJobID);
+                $this->flashMessenger()->addSuccessMessage('Job successfully closed');
+            }
+        }
+
+        $this->flashMessenger()->addErrorMessage('Could not close job');
+        $this->redirect()->toRoute('job',['action'=>'view','id'=>$iJobID]);
+    }
+
+    public function paidAction() {
+        $this->layout('layout/json');
+
+        $iJobID = $this->params()->fromRoute('id', 0);
+        $oJob = $this->oTableGateway->getSingle($iJobID);
+
+        if ($oJob) {
+            $this->oTableGateway->updateAttribute('payment_received',date('Y-m-d H:i:s',time()),'Job_ID',$iJobID);
+            $this->flashMessenger()->addSuccessMessage('Payment booked successfully');
+        }
+
+        $this->flashMessenger()->addErrorMessage('Could not book payment');
+        $this->redirect()->toRoute('job',['action'=>'view','id'=>$iJobID]);
+    }
 }
