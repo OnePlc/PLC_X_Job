@@ -60,4 +60,7 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 (NULL, 'partial', 'Jobs', 'contact_job', 'contact-job', 'contact-single', 'col-md-12', '', '', '0', '1', '0', '', '', ''),
 (NULL, 'partial', 'Contact', 'job_contact', 'job-contact', 'job-single', 'col-md-12', '', '', '0', '1', '0', '', '', '');
 
-
+--
+-- job initial state
+--
+INSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `tag_key`, `tag_value`, `tag_color`, `tag_icon`, `parent_tag_idfs`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (NULL, 'job-single', '2', '', 'new', '', '', '0', '1', '2020-12-13 22:38:56', '1', '2020-12-13 22:38:56'); 
