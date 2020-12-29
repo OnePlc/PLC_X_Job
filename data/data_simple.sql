@@ -63,4 +63,6 @@ INSERT INTO `core_form_field` (`Field_ID`, `type`, `label`, `fieldkey`, `tab`, `
 --
 -- job initial state
 --
-INSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `tag_key`, `tag_value`, `tag_color`, `tag_icon`, `parent_tag_idfs`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES (NULL, 'job-single', '2', '', 'new', '', '', '0', '1', '2020-12-13 22:38:56', '1', '2020-12-13 22:38:56'); 
+IINSERT INTO `core_entity_tag` (`Entitytag_ID`, `entity_form_idfs`, `tag_idfs`, `tag_key`, `tag_value`, `tag_color`, `tag_icon`, `parent_tag_idfs`, `created_by`, `created_date`, `modified_by`, `modified_date`) VALUES
+(NULL, 'job-single', 2, 'new', 'new', '', '', 0, 1, '2020-12-13 22:38:56', 1, '2020-12-13 22:38:56'),
+(NULL, 'job-single', 9, 'order', 'Order', '', '', 0, 1, '2020-12-13 22:38:56', 1, '2020-12-13 22:38:56');
